@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://test.solr.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="SolrTest" targetNamespace="http://test.solr.org/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/test/SolrTest?xsd=1" namespace="http://test.solr.org/" />
+    </xsd:schema>
+  </types>
+  <message name="splitrow">
+    <part name="parameters" element="tns:splitrow" />
+  </message>
+  <message name="splitrowResponse">
+    <part name="parameters" element="tns:splitrowResponse" />
+  </message>
+  <message name="solrq">
+    <part name="parameters" element="tns:solrq" />
+  </message>
+  <message name="solrqResponse">
+    <part name="parameters" element="tns:solrqResponse" />
+  </message>
+  <message name="NounVerb">
+    <part name="parameters" element="tns:NounVerb" />
+  </message>
+  <message name="NounVerbResponse">
+    <part name="parameters" element="tns:NounVerbResponse" />
+  </message>
+  <message name="spellcheck">
+    <part name="parameters" element="tns:spellcheck" />
+  </message>
+  <message name="spellcheckResponse">
+    <part name="parameters" element="tns:spellcheckResponse" />
+  </message>
+  <message name="QueryRet">
+    <part name="parameters" element="tns:QueryRet" />
+  </message>
+  <message name="QueryRetResponse">
+    <part name="parameters" element="tns:QueryRetResponse" />
+  </message>
+  <message name="AutoComplete">
+    <part name="parameters" element="tns:AutoComplete" />
+  </message>
+  <message name="AutoCompleteResponse">
+    <part name="parameters" element="tns:AutoCompleteResponse" />
+  </message>
+  <message name="AutoSug">
+    <part name="parameters" element="tns:AutoSug" />
+  </message>
+  <message name="AutoSugResponse">
+    <part name="parameters" element="tns:AutoSugResponse" />
+  </message>
+  <message name="splitter">
+    <part name="parameters" element="tns:splitter" />
+  </message>
+  <message name="splitterResponse">
+    <part name="parameters" element="tns:splitterResponse" />
+  </message>
+  <portType name="SolrTest">
+    <operation name="splitrow">
+      <input wsam:Action="http://test.solr.org/SolrTest/splitrowRequest" message="tns:splitrow" />
+      <output wsam:Action="http://test.solr.org/SolrTest/splitrowResponse" message="tns:splitrowResponse" />
+    </operation>
+    <operation name="solrq">
+      <input wsam:Action="http://test.solr.org/SolrTest/solrqRequest" message="tns:solrq" />
+      <output wsam:Action="http://test.solr.org/SolrTest/solrqResponse" message="tns:solrqResponse" />
+    </operation>
+    <operation name="NounVerb">
+      <input wsam:Action="http://test.solr.org/SolrTest/NounVerbRequest" message="tns:NounVerb" />
+      <output wsam:Action="http://test.solr.org/SolrTest/NounVerbResponse" message="tns:NounVerbResponse" />
+    </operation>
+    <operation name="spellcheck">
+      <input wsam:Action="http://test.solr.org/SolrTest/spellcheckRequest" message="tns:spellcheck" />
+      <output wsam:Action="http://test.solr.org/SolrTest/spellcheckResponse" message="tns:spellcheckResponse" />
+    </operation>
+    <operation name="QueryRet">
+      <input wsam:Action="http://test.solr.org/SolrTest/QueryRetRequest" message="tns:QueryRet" />
+      <output wsam:Action="http://test.solr.org/SolrTest/QueryRetResponse" message="tns:QueryRetResponse" />
+    </operation>
+    <operation name="AutoComplete">
+      <input wsam:Action="http://test.solr.org/SolrTest/AutoCompleteRequest" message="tns:AutoComplete" />
+      <output wsam:Action="http://test.solr.org/SolrTest/AutoCompleteResponse" message="tns:AutoCompleteResponse" />
+    </operation>
+    <operation name="AutoSug">
+      <input wsam:Action="http://test.solr.org/SolrTest/AutoSugRequest" message="tns:AutoSug" />
+      <output wsam:Action="http://test.solr.org/SolrTest/AutoSugResponse" message="tns:AutoSugResponse" />
+    </operation>
+    <operation name="splitter">
+      <input wsam:Action="http://test.solr.org/SolrTest/splitterRequest" message="tns:splitter" />
+      <output wsam:Action="http://test.solr.org/SolrTest/splitterResponse" message="tns:splitterResponse" />
+    </operation>
+  </portType>
+  <binding name="SolrTestPortBinding" type="tns:SolrTest">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="splitrow">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="solrq">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="NounVerb">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="spellcheck">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="QueryRet">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="AutoComplete">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="AutoSug">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="splitter">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="SolrTest">
+    <port name="SolrTestPort" binding="tns:SolrTestPortBinding">
+      <soap:address location="http://localhost:8080/test/SolrTest" />
+    </port>
+  </service>
+</definitions>

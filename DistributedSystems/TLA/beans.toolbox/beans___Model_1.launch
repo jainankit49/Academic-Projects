@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
+<stringAttribute key="TLCCmdLineParameters" value=""/>
+<intAttribute key="autoLockTime" value="15"/>
+<stringAttribute key="configurationName" value="Model_1"/>
+<intAttribute key="dfidDepth" value="100"/>
+<booleanAttribute key="dfidMode" value="false"/>
+<booleanAttribute key="distributedTLC" value="false"/>
+<stringAttribute key="distributedTLCScript" value=""/>
+<stringAttribute key="distributedTLCVMArgs" value=""/>
+<intAttribute key="fpBits" value="0"/>
+<intAttribute key="fpIndex" value="1"/>
+<intAttribute key="maxHeapSize" value="25"/>
+<intAttribute key="maxSetSize" value="1000000"/>
+<booleanAttribute key="mcMode" value="true"/>
+<stringAttribute key="modelBehaviorInit" value=""/>
+<stringAttribute key="modelBehaviorNext" value=""/>
+<stringAttribute key="modelBehaviorSpec" value="Spec"/>
+<intAttribute key="modelBehaviorSpecType" value="1"/>
+<stringAttribute key="modelBehaviorVars" value="blue, red, green, pc"/>
+<booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
+<listAttribute key="modelCorrectnessInvariants">
+<listEntry value="1red+green+blue&gt;0"/>
+<listEntry value="1red+blue&lt;=400 \/ blue+green&lt;=400 \/ green+red &lt;=400"/>
+<listEntry value="1red+green &gt; 0 \/ green+blue &gt;0"/>
+</listAttribute>
+<listAttribute key="modelCorrectnessProperties">
+<listEntry value="0Termination"/>
+</listAttribute>
+<stringAttribute key="modelExpressionEval" value=""/>
+<stringAttribute key="modelParameterActionConstraint" value=""/>
+<listAttribute key="modelParameterConstants">
+<listEntry value="B;;5;0;0"/>
+<listEntry value="G;;5;0;0"/>
+<listEntry value="R;;5;0;0"/>
+</listAttribute>
+<stringAttribute key="modelParameterContraint" value=""/>
+<listAttribute key="modelParameterDefinitions"/>
+<stringAttribute key="modelParameterModelValues" value="{}"/>
+<stringAttribute key="modelParameterNewDefinitions" value=""/>
+<stringAttribute key="modelPropertiesExpand" value=""/>
+<intAttribute key="numberOfWorkers" value="2"/>
+<booleanAttribute key="recover" value="false"/>
+<intAttribute key="simuAril" value="-1"/>
+<intAttribute key="simuDepth" value="100"/>
+<intAttribute key="simuSeed" value="-1"/>
+<stringAttribute key="specName" value="beans"/>
+<stringAttribute key="view" value=""/>
+</launchConfiguration>

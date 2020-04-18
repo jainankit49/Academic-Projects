@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<schema name="example" version="1.5">
+  
+
+  <types>
+    <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
+    <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+    <fieldtype name="binary" class="solr.BinaryField"/>
+    <fieldType name="int" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="float" class="solr.TrieFloatField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="tint" class="solr.TrieIntField" precisionStep="8" positionIncrementGap="0"/>
+    <fieldType name="tfloat" class="solr.TrieFloatField" precisionStep="8" positionIncrementGap="0"/>
+    <fieldType name="tlong" class="solr.TrieLongField" precisionStep="8" positionIncrementGap="0"/>
+    <fieldType name="tdouble" class="solr.TrieDoubleField" precisionStep="8" positionIncrementGap="0"/>
+    <fieldType name="date" class="solr.TrieDateField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="tdate" class="solr.TrieDateField" precisionStep="6" positionIncrementGap="0"/>
+    <fieldType name="pint" class="solr.IntField"/>
+    <fieldType name="plong" class="solr.LongField"/>
+    <fieldType name="pfloat" class="solr.FloatField"/>
+    <fieldType name="pdouble" class="solr.DoubleField"/>
+    <fieldType name="pdate" class="solr.DateField" sortMissingLast="true"/>
+    <fieldType name="sint" class="solr.SortableIntField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="slong" class="solr.SortableLongField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="sfloat" class="solr.SortableFloatField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="sdouble" class="solr.SortableDoubleField" sortMissingLast="true" omitNorms="true"/>
+    <fieldType name="random" class="solr.RandomSortField" indexed="true" />
+
+    <fieldType name="text_ws" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      </analyzer>
+    </fieldType>
+	
+    <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+  <analyzer type="index">
+  <tokenizer class="solr.WhiteSpaceTokenizerFactory"/>
+  <filter class="solr.PatternReplaceFilterFactory" pattern="'" replacement="" replace="all" />
+  <filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateAll="0" stemEnglishPossessive="0"/>
+  <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+  <filter class="solr.LowerCaseFilterFactory"/>
+  </analyzer>
+  
+ <analyzer type="query">
+  <tokenizer class="solr.StandardTokenizerFactory"/>
+  <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true"/>
+  <filter class="solr.LowerCaseFilterFactory"/> 
+ </analyzer>
+ </fieldType>
+
+    
+  <fieldType name="text_en" class="solr.TextField" positionIncrementGap="100">
+    <analyzer type="index">
+    <tokenizer class="solr.StandardTokenizerFactory"/>
+    <filter class="solr.StopFilterFactory"
+                ignoreCase="true"
+                words="lang/stopwords_en.txt"
+                enablePositionIncrements="true"
+                />
+    <filter class="solr.LowerCaseFilterFactory"/>
+	<filter class="solr.EnglishPossessiveFilterFactory"/>
+    <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+    <filter class="solr.PorterStemFilterFactory"/>
+    </analyzer>
+	  
+    <analyzer type="query">
+    <tokenizer class="solr.StandardTokenizerFactory"/>
+    <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+    <filter class="solr.StopFilterFactory"
+                ignoreCase="true"
+                words="lang/stopwords_en.txt"
+                enablePositionIncrements="true"
+                />
+    <filter class="solr.LowerCaseFilterFactory"/>
+	<filter class="solr.EnglishPossessiveFilterFactory"/>
+    <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+	<filter class="solr.PorterStemFilterFactory"/>
+    </analyzer>
+    </fieldType>
+
+   
+    <fieldType name="text_en_splitting" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
+    <analyzer type="index">
+    <tokenizer class="solr.WhitespaceTokenizerFactory"/>    
+    <filter class="solr.StopFilterFactory"
+                ignoreCase="true"
+                words="lang/stopwords_en.txt"
+                enablePositionIncrements="true"
+                />
+    <filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="1" catenateNumbers="1" catenateAll="0" splitOnCaseChange="1"/>
+    <filter class="solr.LowerCaseFilterFactory"/>
+    <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+    <filter class="solr.PorterStemFilterFactory"/>
+    </analyzer>
+    <analyzer type="query">
+    <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+    <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+    <filter class="solr.StopFilterFactory"
+                ignoreCase="true"
+                words="lang/stopwords_en.txt"
+                enablePositionIncrements="true"
+                />
+    <filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" generateNumberParts="1" catenateWords="0" catenateNumbers="0" catenateAll="0" splitOnCaseChange="1"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+        <filter class="solr.PorterStemFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+    
+    <fieldType name="text_en_splitting_tight" class="solr.TextField" positionIncrementGap="100" autoGeneratePhraseQueries="true">
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="false"/>
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="lang/stopwords_en.txt"/>
+        <filter class="solr.WordDelimiterFilterFactory" generateWordParts="0" generateNumberParts="0" catenateWords="1" catenateNumbers="1" catenateAll="0"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+        <filter class="solr.EnglishMinimalStemFilterFactory"/>
+        
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+    
+    <fieldType name="text_general_rev" class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="index">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.ReversedWildcardFilterFactory" withOriginal="true"
+           maxPosAsterisk="3" maxPosQuestion="2" maxFractionAsterisk="0.33"/>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+    
+    <fieldType name="alphaOnlySort" class="solr.TextField" sortMissingLast="true" omitNorms="true">
+      <analyzer>
+        
+        <tokenizer class="solr.KeywordTokenizerFactory"/> 
+        <filter class="solr.LowerCaseFilterFactory" />
+        <filter class="solr.TrimFilterFactory" />
+        <filter class="solr.PatternReplaceFilterFactory"
+                pattern="([^a-z])" replacement="" replace="all"
+        />
+      </analyzer>
+    </fieldType>
+    
+    <fieldtype name="phonetic" stored="false" indexed="true" class="solr.TextField" >
+      <analyzer>
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.DoubleMetaphoneFilterFactory" inject="false"/>
+      </analyzer>
+    </fieldtype>
+
+    <fieldtype name="payloads" stored="false" indexed="true" class="solr.TextField" >
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.DelimitedPayloadTokenFilterFactory" encoder="float"/>
+      </analyzer>
+    </fieldtype>
+
+    <fieldType name="lowercase" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+
+    <fieldType name="text_path" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.PathHierarchyTokenizerFactory"/>
+      </analyzer>
+    </fieldType>
+    
+
+    
+    <fieldtype name="ignored" stored="false" indexed="false" multiValued="true" class="solr.StrField" />
+    <fieldType name="point" class="solr.PointType" dimension="2" subFieldSuffix="_d"/>
+    <fieldType name="location" class="solr.LatLonType" subFieldSuffix="_coordinate"/>
+    <fieldtype name="geohash" class="solr.GeoHashField"/>
+    <fieldType name="currency" class="solr.CurrencyField" precisionStep="8" defaultCurrency="USD" currencyConfig="currency.xml" />
+    </types>
+          
+
+ <fields>
+   <field name="measurements" type="text_general" indexed="true" stored="true" required="false" />
+   <field name="id" type="string" indexed="true" stored="true" required="false"/> 
+   <field name="sku" type="text_en_splitting_tight" indexed="true" stored="true" omitNorms="true"/>
+   <field name="image" type="string" indexed="false" stored="true" multiValued="true"/>
+   <field name="alphaNameSort" type="alphaOnlySort" indexed="true" stored="false"/>
+   <field name="manu" type="text_general" indexed="true" stored="true" omitNorms="true"/>
+   <field name="cat" type="string" indexed="true" stored="true" multiValued="true"/>
+   <field name="features" type="text_general" indexed="true" stored="true" multiValued="true"/>
+   <field name="includes" type="text_general" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true" />
+   <field name="company" type="string" indexed="true" stored="true"/>
+   <field name="weight" type="float" indexed="true" stored="true" required="false"/>
+   <field name="price"  type="float" indexed="true" stored="true"/>
+   <field name="general"  type="string" indexed="true" stored="true" required="false"/>
+   <field name="popularity" type="int" indexed="true" stored="true" />
+   <field name="inStock" type="boolean" indexed="true" stored="true" />
+   <field name="prizes" type="text_general" indexed="true" stored="true" required="false" />
+  
+   <field name="store" type="location" indexed="true" stored="true"/>
+     <field name="known" type="string" indexed="true" stored="true"/>
+     <field name="workplaces" type="text_general" indexed="true" stored="true" required="false" />
+     <field name="doctoral_students" type="text_general" indexed="true" stored="true" required="false" />
+     <field name="honorofic_prefix" type="text_general" indexed="true" stored="true" required="false" /> 
+	 <field name="honorific_prefix" type="text_general" indexed="true" stored="true" required="false" />
+	 <field name="honorific_suffix" type="text_general" indexed="true" stored="true" required="false" />
+     <field name="Name" type="text_general" indexed="true" stored="true"  />
+	 <field name="name" type="text_general" indexed="true" stored="true" required="true" termVectors="true"
+                   termPositions="true"
+                   termOffsets="true"/>
+     <field name="Cover" type="string" indexed="true" stored="true" required="false" />
+     <field name="field" type="string" indexed="true" stored="true" />
+	 <field name="imagesize" type="string" indexed="true" stored="true" multiValued="true"/>
+     <field name="honorofic_suffix" type="string" indexed="true" stored="true" required="false" /> 
+     <field name="native_name" type="text_general" indexed="true" stored="true" required="false" /> 
+     <field name="native_name_lang" type="string" indexed="true" stored="true" required="false" />
+     <field name="awards" type="string" indexed="true" stored="true" multiValued="true" /> 
+     <field name="alt" type="text_general" indexed="true" stored="true" required="false" /> 
+     <field name="caption" type="text_general" indexed="true" stored="true" required="false" multiValued="true"/> 
+     <field name="birth_name" type="text_general" indexed="true" stored="true" required="false" /> 
+     <field name="birth_date" type="text_general" indexed="true" stored="true" required="false" /> 
+     <field name="baptism_date" type="string" indexed="true" stored="true" required="false" />  
+     <field name="birth_place" type="text_general" indexed="true" stored="true" required="false" multiValued="true"/> 
+     <field name="disappeared_date" type="string" indexed="true" stored="true" required="false" />  
+     <field name="disappeared_place" type="string" indexed="true" stored="true" required="false" />  
+     <field name="disappeared_status" type="string" indexed="true" stored="true" required="false" />  
+     <field name="death_date" type="string" indexed="true" stored="true" required="false" multiValued="true" /> 
+     <field name="death_place" type="string" indexed="true" stored="true" required="false" multiValued="true"/> 
+     <field name="death_cause" type="string" indexed="true" stored="true" required="false" /> 
+     <field name="body_discovered" type="string" indexed="true" stored="true" required="false" />
+     <field name="resting_place" type="string" indexed="true" stored="true" required="false" />  
+     <field name="resting_place_coordinates" type="string" indexed="true" stored="true" required="false" />  
+     <field name="monuments" type="string" indexed="true" stored="true" required="false" />  
+     <field name="residence" type="string" indexed="true" stored="true" required="false" multiValued="true"/>  
+     <field name="nationality" type="string" indexed="true" stored="true" required="false" multiValued="true"/> 
+     <field name="other_names" type="text_general" indexed="true" stored="true" required="false" multiValued="true"/> 
+     <field name="ethnicity" type="string" indexed="true" stored="true" required="false" />  
+	 <field name="ethnicy" type="string" indexed="true" stored="true" required="false" />  
+     <field name="citizenship" type="string" indexed="true" stored="true" required="false" />  
+     <field name="education" type="string" indexed="true" stored="true" required="false" />  
+     <field name="alma_maters" type="text_general" indexed="true" stored="true" required="false" />  
+     <field name="serviceyears" type="text_general" indexed="true" stored="true" required="false" />
+     <field name="occupation" type="text_general" indexed="true" stored="true" required="false" multiValued="true"/> 
+	 <field name="rank" type="text_general" indexed="true" stored="true" required="false" />
+	 <field name="battles" type="text_general" indexed="true" stored="true" required="false" />
+     <field name="years_active" type="string" indexed="true" stored="true" required="false" multiValued="true"/>  
+	 <field name="yearsactive" type="string" indexed="true" stored="true" required="false" multiValued="true"/>  
+	 <field name="family" type="string" indexed="true" stored="true" required="false" />  
+     <field name="employer" type="string" indexed="true" stored="true" required="false" />  
+     <field name="organization" type="string" indexed="true" stored="true" required="false" />  
+     <field name="agent" type="string" indexed="true" stored="true" required="false" />  
+     <field name="known_for" type="string" indexed="true" stored="true" required="false" multiValued="true"/> 
+     <field name="notable_works" type="string" indexed="true" stored="true" required="false" multiValued="true"/>  
+     <field name="style" type="string" indexed="true" stored="true" required="false" />  
+     <field name="home_town" type="string" indexed="true" stored="true" required="false" />  
+     <field name="salary" type="string" indexed="true" stored="true" required="false" />  
+     <field name="net_worth" type="string" indexed="true" stored="true" required="false" /> 
+     <field name="height" type="string" indexed="true" stored="true" required="false" />  
+     <field name="political_party" type="text_general" indexed="true" stored="true" required="false" />
+     <field name="allegiance" type="text_general" indexed="true" stored="true" required="false" />	 
+     <field name="television" type="string" indexed="true" stored="true" required="false" /> 
+     <field name="work_institutions" type="text_general" indexed="true" stored="true" required="false" multiValued="true"/>	
+     <field name="doctoral_advisor" type="text_general" indexed="true" stored="true" required="false" />	 
+	 <field name="alma_mater" type="text_general" indexed="true" stored="true" required="false" />
+	 <field name="notable_students" type="text_general" indexed="true" stored="true" required="false" />
+     <field name="term" type="string" indexed="true" stored="true" required="false" multiValued="true"/>  
+     <field name="networth" type="string" indexed="true" stored="true" required="false" />
+     <field name="party" type="string" indexed="true" stored="true" required="false" />   
+     <field name="movement" type="string" indexed="true" stored="true" required="false" />  
+     <field name="opponents" type="text_general" indexed="true" stored="true" required="false" />  
+     <field name="religion" type="string" indexed="true" stored="true" required="false" multiValued="true"/>  
+     <field name="denomination" type="string" indexed="true" stored="true" required="false" />  
+     <field name="criminal_charge" type="string" indexed="true" stored="true" required="false" />  
+     <field name="criminal_penalty" type="string" indexed="true" stored="true" required="false" />  
+     <field name="criminal_status" type="string" indexed="true" stored="true" required="false" />  
+     <field name="spouse" type="text_general" indexed="true" stored="true" required="false" multiValued="true"/>  
+     <field name="partner" type="text_general" indexed="true" stored="true" required="false" />  
+     <field name="children" type="text_general" indexed="true" stored="true" required="false" multiValued="true"/>  
+     <field name="parents" type="text_general" indexed="true" stored="true" required="false" multiValued="true"/>  
+     <field name="relatives" type="text_general" indexed="true" stored="true" required="false" />  
+     <field name="image_width" type="text_general" indexed="true" stored="true" required="false" />
+     <field name="signature" type="string" indexed="true" stored="true" required="false" multiValued="true"/>  
+     <field name="signature_alt" type="string" indexed="true" stored="true" required="false" />  
+     <field name="signature_size" type="string" indexed="true" stored="true" required="false" />  
+     <field name="module" type="string" indexed="true" stored="true" required="false" />  
+     <field name="module2" type="string" indexed="true" stored="true" required="false" />  
+     <field name="module3" type="string" indexed="true" stored="true" required="false" />  
+     <field name="module4" type="string" indexed="true" stored="true" required="false" />  
+     <field name="module5" type="string" indexed="true" stored="true" required="false" />  
+     <field name="module6" type="string" indexed="true" stored="true" required="false" />  
+     <field name="website" type="string" indexed="true" stored="true" required="false" />  
+     <field name="footnotes" type="string" indexed="true" stored="true" required="false" />  
+     <field name="box_width" type="string" indexed="true" stored="true" required="false" />  
+     <field name="boards" type="string" indexed="true" stored="true" />
+	 
+     
+  <!--PERSON INFOBOX ENDS-->
+  
+  <!--MOVIES INFOBOX START-->
+   
+     <!--<field name="name" type="text_general" indexed="true" stored="true" />-->
+     <field name="director" type="text_general" indexed="true" stored="true" multiValued="true"/>
+	 <field name="bgcolor" type="string" indexed="true" stored="true" />
+	 <field name="bgcolour" type="string" indexed="true" stored="true" />
+	 <field name="fgcolor" type="string" indexed="true" stored="true" />
+	 <field name="fgcolour" type="string" indexed="true" stored="true" />
+	 <field name="image_border" type="string" indexed="true" stored="true" />
+	 <field name="type" type="string" indexed="true" stored="true" multiValued="true"/>
+	 <field name="image_size" type="string" indexed="true" stored="true" multiValued="true"/>
+	 <field name="father" type="string" indexed="true" stored="true" />
+	 <field name="based" type="string" indexed="true" stored="true" />
+	 <field name="influences" type="string" indexed="true" stored="true" />
+	 <field name="influenced" type="string" indexed="true" stored="true" />
+	 <field name="relations" type="string" indexed="true" stored="true" />
+	 <field name="callsign" type="string" indexed="true" stored="true" />
+	 <field name="established" type="string" indexed="true" stored="true" />
+     <field name="producer" type="text_general" indexed="true" stored="true" multiValued="true"/>
+     <field name="writer" type="text_general" indexed="true" stored="true" multiValued="true"/>
+     <field name="screenplay" type="text_general" indexed="true" stored="true" multiValued="true"/>
+     <field name="story" type="text_general" indexed="true" stored="true" />
+     <field name="based on" type="string" indexed="true" stored="true" />
+     <field name="narrator" type="text_general" indexed="true" stored="true" />
+     <field name="starring" type="text_general" indexed="true" stored="true" multiValued="true"/>
+     <field name="music" type="text_general" indexed="true" stored="true" multiValued="true"/>
+     <field name="cinematography" type="text_general" indexed="true" stored="true" multiValued="true"/>
+     <field name="editing" type="text_general" indexed="true" stored="true" multiValued="true"/>
+     <field name="studio" type="text_general" indexed="true" stored="true" multiValued="true"/>
+     <field name="distributor" type="text_general" indexed="true" stored="true" multiValued="true"/>
+     <field name="released" type="string" indexed="true" stored="true" multiValued="true"/>
+     <field name="runtime" type="string" indexed="true" stored="true" />
+     <field name="country" type="string" indexed="true" stored="true" multiValued="true"/>
+     <field name="gross" type="string" indexed="true" stored="true" /> 
+	 
+<field name="Caption" type="string" indexed="true" stored="true" required="false" />
+<field name="Type" type="string" indexed="true" stored="true" required="false" />
+<field name="Artist" type="string" indexed="true" stored="true" required="false" />
+<field name="Album" type="string" indexed="true" stored="true" required="false" />
+<field name="Published" type="string" indexed="true" stored="true" required="false" multiValued="true"/>
+<field name="Released" type="string" indexed="true" stored="true" required="false" multiValued="true"/>
+<field name="track_no" type="string" indexed="true" stored="true" required="false" />
+<field name="Recorded" type="string" indexed="true" stored="true" required="false" />
+<field name="Genre" type="string" indexed="true" stored="true" required="false" />
+<field name="Length" type="string" indexed="true" stored="true" required="false" />
+<field name="Writer" type="string" indexed="true" stored="true" required="false" />
+<field name="Composer" type="string" indexed="true" stored="true" required="false" />
+<field name="Label" type="string" indexed="true" stored="true" required="false" />
+<field name="Producer" type="string" indexed="true" stored="true" required="false" />
+
+<field name="Chart" type="string" indexed="true" stored="true" required="false" />
+<field name="Tracks" type="string" indexed="true" stored="true" required="false" />
+<field name="prev" type="string" indexed="true" stored="true" required="false" />
+<field name="prev_no" type="string" indexed="true" stored="true" required="false" />
+<field name="next" type="string" indexed="true" stored="true" required="false" />
+<field name="next_no" type="string" indexed="true" stored="true" required="false" />
+<field name="Misc" type="string" indexed="true" stored="true" required="false" />
+<field name="Upper" type="string" indexed="true" stored="true" required="false" />
+<field name="Audio" type="string" indexed="true" stored="true" required="false" multiValued="true"/>
+<field name="Background" type="string" indexed="true" stored="true" required="false" />
+	 
+     <!--MOVIES INFOBOX START-->
+	 
+	 <!--ORGANIZATION INFOBOX START-->
+	 <field name="title" type="text_general" indexed="true" stored="true" required="false" multiValued="true"/>
+	<field name="size" type="string" indexed="true" stored="true" required="false" />
+	<field name="map" type="string" indexed="true" stored="true" required="false" />
+	<field name="msize" type="string" indexed="true" stored="true" required="false" />
+	<field name="malt" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="mcaption" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="map2" type="string" indexed="true" stored="true" required="false" />
+	<field name="abbreviation" type="string" indexed="true" stored="true" required="false" />
+	<field name="merger" type="string" indexed="true" stored="true" required="false" multiValued="true"/>
+	<field name="motto" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="mission" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="predecessor" type="string" indexed="true" stored="true" required="false" />
+	<field name="successor" type="string" indexed="true" stored="true" required="false" />
+	<field name="formation" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="founded" type="string" indexed="true" stored="true" required="false" />
+	<field name="founder" type="string" indexed="true" stored="true" required="false" />
+	<field name="extinction" type="string" indexed="true" stored="true" required="false" />
+	<field name="status" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="purpose" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="professional_title" type="string" indexed="true" stored="true" required="false" />
+	<field name="headquarters" type="string" indexed="true" stored="true" required="false" />
+	<field name="location" type="string" indexed="true" stored="true" required="false" />
+	<field name="coords" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="region_served" type="string" indexed="true" stored="true" required="false" />
+	<field name="services" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="membership" type="string" indexed="true" stored="true" required="false" />
+	<field name="member" type="string" indexed="true" stored="true" required="false" />
+	<field name="language" type="string" indexed="true" stored="true" required="false" />
+	<field name="leader_title" type="string" indexed="true" stored="true" required="false" />
+	<field name="leader_name" type="string" indexed="true" stored="true" required="false" />
+	<field name="leader_title2" type="string" indexed="true" stored="true" required="false" />
+	<field name="leader_name2" type="string" indexed="true" stored="true" required="false" />
+	<field name="leader_title3" type="string" indexed="true" stored="true" required="false" />
+	<field name="leader_name3" type="string" indexed="true" stored="true" required="false" />
+	<field name="leader_title4" type="string" indexed="true" stored="true" required="false" />
+	<field name="leader_name4" type="string" indexed="true" stored="true" required="false" />
+	<field name="key_people" type="string" indexed="true" stored="true" required="false" />
+	<field name="main_organ" type="string" indexed="true" stored="true" required="false" />
+	<field name="parent_organization" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="subsidiaries" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="affiliations" type="text_general" indexed="true" stored="true" required="false" multiValued="true"/>
+	<field name="budget" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="num_staff" type="string" indexed="true" stored="true" required="false" />
+	<field name="num_volunteers" type="string" indexed="true" stored="true" required="false" />
+	<field name="slogan" type="string" indexed="true" stored="true" required="false" />
+	<field name="remarks" type="text_general" indexed="true" stored="true" required="false" />
+	<field name="former name" type="string" indexed="true" stored="true" required="false" />
+	
+	<!-- ORGANIZATION ENDS-->
+  <field name="author_abbrev_bot" type="text_general" indexed="true" stored="true" required="false" />
+   <field name="subject" type="text_general" indexed="true" stored="true"/>
+   <field name="description" type="text_general" indexed="true" stored="true"/>
+   <field name="comments" type="text_general" indexed="true" stored="true"/>
+   <field name="author" type="text_general" indexed="true" stored="true"/>
+   <field name="keywords" type="text_general" indexed="true" stored="true"/>
+   <field name="category" type="text_general" indexed="true" stored="true"/>
+   <field name="content_type" type="string" indexed="true" stored="true" multiValued="true"/>
+   <field name="last_modified" type="date" indexed="true" stored="true"/>
+   <field name="links" type="string" indexed="true" stored="true" multiValued="true"/>
+   <field name="author_abbrev_zoo" type="text_general" indexed="true" stored="true" required="false" />
+   
+   <field name="text" type="text_general" indexed="true" stored="false" multiValued="true"/>
+
+   
+   <field name="text_rev" type="text_general_rev" indexed="true" stored="false" multiValued="true"/>
+
+   
+   <field name="manu_exact" type="string" indexed="true" stored="false"/>
+
+   <field name="payloads" type="payloads" indexed="true" stored="true"/>
+
+   
+   <dynamicField name="*_i"  type="int"    indexed="true"  stored="true"/>
+   <dynamicField name="*_s"  type="string"  indexed="true"  stored="true"/>
+   <dynamicField name="*_l"  type="long"   indexed="true"  stored="true"/>
+   <dynamicField name="*_t"  type="text_general"    indexed="true"  stored="true"/>
+   <dynamicField name="*_txt" type="text_general"    indexed="true"  stored="true" multiValued="true"/>
+   <dynamicField name="*_en"  type="text_en"    indexed="true"  stored="true" multiValued="true" />
+   <dynamicField name="*_b"  type="boolean" indexed="true"  stored="true"/>
+   <dynamicField name="*_f"  type="float"  indexed="true"  stored="true"/>
+   <dynamicField name="*_d"  type="double" indexed="true"  stored="true"/>
+
+   
+   <dynamicField name="*_coordinate"  type="tdouble" indexed="true"  stored="false"/>
+
+   <dynamicField name="*_dt" type="date"    indexed="true"  stored="true"/>
+   <dynamicField name="*_p"  type="location" indexed="true" stored="true"/>
+
+   
+   <dynamicField name="*_ti" type="tint"    indexed="true"  stored="true"/>
+   <dynamicField name="*_tl" type="tlong"   indexed="true"  stored="true"/>
+   <dynamicField name="*_tf" type="tfloat"  indexed="true"  stored="true"/>
+   <dynamicField name="*_td" type="tdouble" indexed="true"  stored="true"/>
+   <dynamicField name="*_tdt" type="tdate"  indexed="true"  stored="true"/>
+   
+   <dynamicField name="*_pi"  type="pint"    indexed="true"  stored="true"/>
+   <dynamicField name="*_c"   type="currency" indexed="true"  stored="true"/>
+
+   <dynamicField name="ignored_*" type="ignored" multiValued="true"/>
+   <dynamicField name="attr_*" type="text_general" indexed="true" stored="true" multiValued="true"/>
+
+   <dynamicField name="random_*" type="random" />
+
+   
+   
+ </fields>
+ 
+ 
+
+ 
+ <uniqueKey>name</uniqueKey>
+
+  
+
+   
+   <copyField source="name" dest="text"/>
+   
+ </schema>

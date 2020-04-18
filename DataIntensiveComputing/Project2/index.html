@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<title>Twitter Data Visualization</title>
+</head>
+
+<body bgcolor="#333366">
+<font color="FFFFCC">
+<center>
+<div id="container">
+	<div id="header">
+		<h1><center><font color="">Twitter Data Visualization</font></center></h1>
+    	</div>
+
+<p><strong> We aim to analyze and find the current popular mobile brand in the market with the help of these visualizations plotted on output data of various MR algorithms. We used the hashtags for mobile brands like Apple Iphone6, Google Nexus, HTC One, Samsung Galaxy S5, Nokia Lumia to collect our data through Twitter 4J. Our aim is to find out whether the new mobile launch for these vendors is going to be a success or not.</strong></p>
+<br></br>
+
+<h2>Mobile Phone Companies and their Popularity (in Word Count)</h2>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	 <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart1);
+      function drawChart1() {
+        var data = google.visualization.arrayToDataTable([
+          ['CellPhone', 'Word Count'],
+          ['Apple', 399], ['Samsung', 3415], ['Nokia', 950],
+          ['Google', 133], ['HTC', 704]
+        ]);
+
+        var options = {
+          legend: 'none',
+          pieSliceText: 'label',
+          slices: {  2: {offset: 0.3},
+                    12: {offset: 0.3},
+                    14: {offset: 0.4},
+                    15: {offset: 0.5},
+          },
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+<p><i><center><b>This pie chart clearly indicates the number of word counts corresponding to the leading mobile companies. The word counts for twitter data was calculated with the help of Map Reduce. We took into consideration only those words for which we want to do the analysis. From the above figure we can conclude that "Samsung" appeared the highest number of times in our dataset. </b></center></i></p>
+<br></br>
+
+
+<h2>Trends as per Hashtags</h2>
+    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+		<div id='trends'></div>
+	    <script type='text/javascript'>
+	      google.load('visualization', '1', {packages:['gauge']});
+	      google.setOnLoadCallback(drawChart3);
+	      function drawChart3() {
+	        var data = google.visualization.arrayToDataTable([
+	          ['Label', 'Value'],
+	          ['iPhone', 34662],
+	          ['GalaxyS5', 34445],
+	          ['HTCOne', 8881],
+	          ['Nokia', 877],
+	          ['Nexus', 91]
+	        ]);
+
+	        var options = {
+	          width: 50000, height: 250,
+	          redFrom: 25000, redTo: 35000,
+	          yellowFrom:10000, yellowTo: 25000,
+	          minorTicks: 5, max:35000
+	        };
+
+	        var chart = new google.visualization.Gauge(document.getElementById('trends'));
+	        chart.draw(data, options);
+	      }
+
+ </script>
+<p><i><center><b>This above figure indicates hash counts corresponding to the leading mobile companies. These hash tags counts were calculated using MR algorithm. Although we cannot infer directly from hash tag counts about the positives and negatives of any brand but still it helped to gauge the popularity of these brands. From the above figure, it is clear that the hash tag counts for iphone is highest.</b> </center></i></p>
+<br></br>
+
+      <h2>Hashtags & Handles</h2>
+      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	  	<div id="handles" style="width: 900px; height: 500px;"></div>
+	      <script type="text/javascript">
+	        google.load("visualization", "1", {packages:["corechart"]});
+	        google.setOnLoadCallback(drawChart4);
+	        function drawChart4() {
+	          var data = google.visualization.arrayToDataTable([
+	            ['Phone Models',  'HashTags', 'Handles'],
+	            ['iPhone6',       9198,         153],
+	            ['iPhone5',       6871,         22],
+	            ['Galaxy S5',     4193,         15],
+	            ['Galaxy Note 3', 3710,         7],
+	            ['Lumia 1020',    1785,         2],
+	            ['HTC One',       19748,        104],
+	            ['Nexus 5',       1325,          1],
+	          ]);
+
+	          var options = {
+
+	            vAxis: {title: 'No. of Hashtags/Handles'},
+	            isStacked: true
+	          };
+
+	          var chart = new google.visualization.SteppedAreaChart(document.getElementById('handles'));
+	          chart.draw(data, options);
+	        }
+    </script>
+
+<p><i><center><b>This above figure indicates number of twitter handles associated with the hash tags. This data can be used to analyze the number of users associated with each hash tags. A company's product launch will be successfull if more users know about it and are willing to buy it. Twitter handle data can then be used to analyze whether the new product launch is going to be hit or not. In our case, twitter handle data for iPhone6 is highest. Till now, we can conclude that the two popular mobile brand among users is Apple iphone and Samsung Galaxy as they have the highest word counts, hash counts and twitter handlesin our dataset. But still we need to find out about the positive or negative nature of this popularity.</b> </center></i></p>
+<br></br>
+
+
+    <h2>Words used in Pairs with Mobile Phones</h2>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		 <div id="bar" style="width: 900px; height: 500px;"></div>
+	    <script type="text/javascript">
+	      google.load("visualization", "1", {packages:["corechart"]});
+	      google.setOnLoadCallback(drawChart2);
+	      function drawChart2() {
+	        var data = google.visualization.arrayToDataTable([
+			        ['', 'Love', 'Hate', 'Good', 'Bad', { role: 'annotation' } ],
+			        ['iPhone', 18, 5, 29, 13, ''],
+			        ['Galaxy', 24, 22, 23, 20, ''],
+			        ['Lumia', 3, 19, 1, 30, ''],
+			        ['Nexus', 2, 13, 29, 30, ''],
+			        ['HTC', 6, 19, 2, 30,''],
+			      ]);
+
+			      var options = {
+			        width: 700,
+			        height: 400,
+			        legend: { position: 'top', maxLines: 3 },
+					bar: { groupWidth: '85%' },
+			        isStacked: true,
+	      };
+
+	        var chart = new google.visualization.BarChart(document.getElementById('bar'));
+	        chart.draw(data, options);
+	      }
+    </script>
+<p><i><center><b>From the visualizations done till yet, we are still not confirmed whether the tweets associated with the brand are positive or negative.
+For that, we made use of Word Co-occurence MR algorithm to find out the highest number of positive and negative word pairs associated with these brands.
+This bar plot indicates the number of word pairs (positive and negative) for various phone brands. We can conclude that, the number of positive word pair
+for iPhone is highest i.e. (iPhone Good) & (iPhone Love). Samsung Galaxy is also close to Apple but it has more negative word pairs (Galaxy Hate) and
+(Galaxy Bad) as compared to Apple iPhone</b> </center></i></p>
+<br></br>
+
+
+<h2>Stripes</h2>
+    <script type="text/javascript"
+	           src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['sankey']}]}">
+	</script>
+
+	<div id="sankey_multiple" style="width: 900px; height: 300px;"></div>
+	<script type="text/javascript">google.setOnLoadCallback(drawChart5);
+	   function drawChart5() {
+	    var data = new google.visualization.DataTable();
+	    data.addColumn('string', 'From');
+	    data.addColumn('string', 'To');
+	    data.addColumn('number', 'Weight');
+	    data.addRows([
+	       [ 'iPhone', 'Style', 5 ],
+	       [ 'iPhone', 'Like', 1 ],
+	       [ 'iPhone', 'Class', 5 ],
+	       [ 'iPhone', 'Bad', 1 ],
+	       [ 'iPhone', 'Good', 5 ],
+	       [ 'iPhone', 'Cheap', 1 ],
+	       [ 'iPhone', 'Fast', 5 ],
+	       [ 'iPhone', 'Nice', 5 ],
+	       [ 'iPhone', 'Hate', 2 ],
+	       [ 'iPhone', 'Love', 5 ],
+	       [ 'Cheap', 'Nokia', 5 ],
+	       [ 'Sad', 'Nokia', 2 ],
+	       [ 'Cool', 'Nokia', 3 ],
+	       [ 'Hate', 'Nokia', 3 ],
+	       [ 'Sad', 'Lumia', 4 ],
+	       [ 'Like', 'Lumia', 3 ],
+	       [ 'Cheap', 'Lumia', 4 ],
+	       [ 'Bad', 'Lumia', 3 ],
+	       [ 'Like', 'Galaxy', 4 ],
+	       [ 'Class', 'Galaxy', 4 ],
+	       [ 'Fast', 'Galaxy', 5 ],
+	       [ 'Nice', 'Galaxy', 5 ],
+	       [ 'Hate', 'Galaxy', 2 ],
+	       [ 'Love', 'Galaxy', 3 ],
+	       [ 'Style', 'Galaxy', 5 ],
+	       [ 'Good', 'Galaxy', 5 ],
+	       [ 'Google', 'Good', 5 ],
+	       [ 'Google', 'Cool', 3 ],
+	       [ 'Google', 'Cheap', 5 ],
+	       [ 'Google', 'Bad', 5 ],
+		   [ 'HTCOne', 'Sad', 2 ],
+		   [ 'HTCOne', 'Bad', 3 ],
+		   [ 'HTCOne', 'Cheap', 5 ],
+		   [ 'HTCOne', 'Like', 4 ],
+	    ]);
+
+	    // Set chart options
+	    var options = {
+	      width: 600,
+	           sankey: {
+		          link: { color: { fill: 'white' } },
+		          node: { color: { fill: '#00FFFF'},
+		                  label: { color: '#871b47' } },
+	      }
+	    };
+
+	    // Instantiate and draw our chart, passing in some options.
+	    var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
+	    chart.draw(data, options);
+	   }
+</script>
+<p><i><center><b>From the last visualization we concluded that the Apple Iphone has more positive tweets as compared to any other brand. Same analysis is done using the Stripes MR algorithm. In the above figure, if you hover the pointer slowly, you will notice that the figure displays the sentiment pairs associated for our key words. Also, the thickness for connection band indicates the frequency of that word pair in our data set. <h3><strong> <br> </br></center></i></p>
+<br></br>
+
+<h2>Comparison (%age share)</h2>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+       <script type="text/javascript">google.load('visualization', '1', {packages: ['corechart']});
+    </script>
+	    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+	<script type="text/javascript">google.setOnLoadCallback(drawChart5);
+	   function drawChart5() {
+ // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Phone', 'Hashtags', 'Handles', 'Trends', 'Word Count'],
+          ['iPhone',  34.31,     57.37,       43.90,      7.12],
+          ['Galaxy',  16.87,      7.23,       43.62,     60.97],
+          ['Nokia',    3.81,      0.65,        1.11,     16.96],
+          ['Nexus',    2.95,      0.32,        0.11,      2.37],
+          ['HTC One', 42.16,     34.21,       11.24,     12.56]
+        ]);
+
+        var options = {
+          vAxis: {title: "Count", maxValue: 100},
+          hAxis: {title: "Phone"},
+          seriesType: "bars",
+          series: {5: {type: "line"}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      google.setOnLoadCallback(drawVisualization);
+</script>
+<p><i> <h3>From this figure also, we conclude that Apple Iphone has more positive tweets as compared to any other brand.
+So, we predict higher chances of their next product i.e Apple Iphone6 to top the market trends.</b></h3> </i></p>
+<br></br>
+</center>
+</font>
+</body>
+
+</html>

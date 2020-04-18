@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://test.solr.org/" targetNamespace="http://test.solr.org/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="AutoComplete" type="tns:AutoComplete" />
+  <xs:element name="AutoCompleteResponse" type="tns:AutoCompleteResponse" />
+  <xs:element name="AutoSug" type="tns:AutoSug" />
+  <xs:element name="AutoSugResponse" type="tns:AutoSugResponse" />
+  <xs:element name="NounVerb" type="tns:NounVerb" />
+  <xs:element name="NounVerbResponse" type="tns:NounVerbResponse" />
+  <xs:element name="QueryRet" type="tns:QueryRet" />
+  <xs:element name="QueryRetResponse" type="tns:QueryRetResponse" />
+  <xs:element name="solrq" type="tns:solrq" />
+  <xs:element name="solrqResponse" type="tns:solrqResponse" />
+  <xs:element name="spellcheck" type="tns:spellcheck" />
+  <xs:element name="spellcheckResponse" type="tns:spellcheckResponse" />
+  <xs:element name="splitrow" type="tns:splitrow" />
+  <xs:element name="splitrowResponse" type="tns:splitrowResponse" />
+  <xs:element name="splitter" type="tns:splitter" />
+  <xs:element name="splitterResponse" type="tns:splitterResponse" />
+  <xs:complexType name="AutoSug">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="q" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AutoSugResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="spellcheck">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="key" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="spellcheckResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="solrq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="q1" type="xs:string" />
+      <xs:element minOccurs="0" name="q2" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="solrqResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="splitrow">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="q" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="splitrowResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NounVerb">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="query" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NounVerbResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryRet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="key" type="xs:string" />
+      <xs:element minOccurs="0" name="field" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryRetResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="splitter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="info" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="splitterResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AutoComplete">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="q" type="xs:string" />
+      <xs:element name="limit" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AutoCompleteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
